@@ -1,0 +1,90 @@
+ALGORITHM algorithm_name
+VAR
+   x,k,,test,sum,sum1,sum2,j,i,h,,count,c,count2,sum5:INTEGER;
+   htab : HASH_TABLE<INTEGER,INTEGER>
+   
+  
+    tab1 :ARRAY_OF[INTEGER];
+    tab2 :ARRAY_OF[INTEGER];
+      tab2 :ARRAY_OF[INTEGER];
+   
+BEGIN
+    
+    REPEAT
+        write("donner le taille de tableau1");
+        read(x);
+    UNTIL (x>0)
+     REPEAT
+        write("donner le taille de tableau2");
+        read(k);
+    UNTIL (k>0)
+    //* 1 ére partie
+ sum:=0;
+ h:=0;
+   //* 1 ére array
+    FOR i FROM 0 TO x-1 STEP 1  DO
+        FOR j FROM 0 TO k-1 STEP 1  DO
+          IF (tab1[i]==tab2[j]) THEN
+              sum1=sum1+1;
+               tab3[h]:=tab1[i];
+               h=h+1;
+
+          END_IF    
+        END_FOR
+    END_FOR
+      //* 2 éme array
+    c:=0;
+     FOR i FROM 0 TO k-1 STEP 1  DO
+        FOR j FROM 0 TO x-1 STEP 1  DO
+          IF (tab1[i]==tab2[j]) THEN
+              sum2=sum2+1;
+              
+                tab3[h]:=tab2[i];
+               c=c+1;
+
+          END_IF    
+        END_FOR
+    END_FOR
+    sum:=sum1+sum2;
+    whrite("total of number="sum);
+    FOR i FROM 0 TO c-2 STEP 1  DO
+        whrite("number is "tab3[i]);
+    END_FOR
+  
+   //* 2 éme partie
+   count:=0;
+   count2:=0;
+   
+   //* 2 éme array
+     FOR i FROM 0 TO x-1 STEP 1  DO
+       IF (htab.lookup(tab1[i]) = TRUE) THEN
+           count := htab.get(tab1[i]);
+           htab.insert(tab1[i],count+1);
+           
+       ELSE
+           htab.insert(tab1[i],1);
+         
+       END_IF
+   END_FOR
+   //* 2 éme array
+    FOR i FROM 0 TO k-1 STEP 1  DO
+       IF (htab.lookup(tab2[i]) = TRUE) THEN
+           count2 := htab.get(tab2[i]);
+           htab.insert(tab2[i],count2+1);
+            
+       ELSE
+           htab.insert(tab2[i],1);
+         
+       END_IF
+   END_FOR
+   sum5:=0;
+   FOR i FROM 0 TO x+k-1 STEP 1  DO
+       IF (htab.get(tab3[i])=1) THEN
+           whrite(tab3[i]);
+           sum5:=sum5+tab3[i];
+       END_IF
+   END_FOR
+ 
+END
+
+   
